@@ -1,0 +1,14 @@
+#!/bin/bash
+
+count=10;
+for NUM in `seq -w 1 $count`
+do
+TIMESTAMP=$(date +"%Y-%m-%d_%H:%M:%S")
+touch file.txt # test_${TIMESTAMP}_$NUM.txt
+
+cat /dev/urandom | tr -dc '[:alpha:]' | fold -w ${1:-20} | head -n 50 >> file.txt
+mv -f file.txt test_${TIMESTAMP}_$NUM.txt
+done
+
+#to run the script every 6 hours, you need to:
+#add it to cron (crontab -e) and write: 0 6 * * * /yorScript
