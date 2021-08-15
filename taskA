@@ -1,0 +1,12 @@
+#!/bin/bash
+
+find=nginx-01.com
+mydir=/home/andrey/nginx-config
+myfile=($mydir/*)
+
+cd $mydir
+for file in $mydir/*
+do
+sed s/$find/nginx-02.com/ $file >> $file.new
+mv -f $file.new $file
+done
